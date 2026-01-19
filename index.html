@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Formatter — Book More Calls from Cold Email</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-tertiary: #18181b;
+            --bg-card: #1c1c1f;
+            --border-color: #27272a;
+            --border-subtle: #1f1f23;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent-primary: #6366f1;
+            --accent-secondary: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --success: #22c55e;
+            --gradient-start: #6366f1;
+            --gradient-end: #a855f7;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .launch-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .launch-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 4.5vw, 52px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            max-width: 750px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: clamp(18px, 2vw, 20px);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        /* VSL Container */
+        .vsl-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        .vsl-wrapper {
+            position: relative;
+            padding-top: 56.25%;
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .vsl-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .vsl-placeholder:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .vsl-placeholder:hover .play-button {
+            transform: scale(1.1);
+            box-shadow: 0 0 60px rgba(99, 102, 241, 0.5);
+        }
+
+        .play-button svg {
+            width: 32px;
+            height: 32px;
+            margin-left: 4px;
+        }
+
+        .vsl-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Email Form */
+        .email-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin-bottom: 24px;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .email-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .submit-btn {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .creator-line {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .creator-line a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .creator-line a:hover {
+            color: var(--accent-secondary);
+        }
+
+        /* Proof Line */
+        .proof-line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
+
+        .proof-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-weight: 600;
+        }
+
+        .proof-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .proof-text {
+            color: var(--text-secondary);
+        }
+
+        /* What You Get Section */
+        .benefits-section {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-secondary);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            margin-bottom: 48px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .benefit-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+        }
+
+        .benefit-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .benefit-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .benefit-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .plus-section {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .plus-section h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .plus-badge {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .plus-section p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Tiers Section */
+        .tiers-section {
+            padding: 100px 0;
+        }
+
+        .tiers-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .tiers-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .tier-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tier-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+        }
+
+        .tier-card.featured {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border-color: var(--accent-primary);
+        }
+
+        .tier-badge {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-secondary);
+            margin-bottom: 8px;
+        }
+
+        .tier-card.base .tier-badge {
+            color: var(--success);
+        }
+
+        .tier-requirement {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .tier-card.base .tier-requirement {
+            color: var(--success);
+        }
+
+        .tier-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 16px 0;
+        }
+
+        .tier-reward h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .tier-reward p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+
+        .final-cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .urgency-text {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .final-cta .email-form {
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .trust-line {
+            font-size: 14px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trust-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--success);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tiers-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 60px 0 40px;
+                min-height: auto;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+
+            .trust-line {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="launch-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    Launches January 31
+                </div>
+                
+                <h1>Turn Your Lead Lists into Emails That Sign Clients</h1>
+                
+                <p class="hero-description">
+                    Lead Formatter pulls each company's info and writes emails that reference their actual business — so every email feels 1:1.
+                </p>
+
+                <div class="proof-line">
+                    <span class="proof-badge">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        1,000+ cold emailers
+                    </span>
+                    <span class="proof-text">used Lead Formatter as a Google Sheet. Now it's a web app.</span>
+                </div>
+
+                <div class="vsl-container">
+                    <div class="vsl-wrapper">
+                        <div class="vsl-placeholder">
+                            <div class="play-button">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                            <span class="vsl-text">See the new Lead Formatter →</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="email-form">
+                    <input type="email" class="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="submit-btn">Join the Waitlist</button>
+                </form>
+
+                <p class="creator-line">
+                    Built by Sean Longden
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You Get Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <p class="section-label">What You Get</p>
+            <h2 class="section-title">For joining the waitlist, you get instant access to:</h2>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3>The Cold Email Bible</h3>
+                    <p>How to write emails that get 5%+ reply rates (most get &lt;1%)</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3>Email Generator</h3>
+                    <p>Paste your offer, get ready-to-send cold emails in 60 seconds</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3>10 Proven Niches + AI Prompt</h3>
+                    <p>Skip the guesswork — target markets that actually respond</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3>Exclusive Partner Discounts</h3>
+                    <p>Save hundreds/year on inboxes, warmup, leads, and tools</p>
+                </div>
+            </div>
+
+            <div class="plus-section">
+                <h4><span class="plus-badge">Plus</span> Ongoing Value</h4>
+                <p>Weekly teardowns of real cold email campaigns — what worked, what didn't, why. And competitions where you can win free coaching, tools, and more.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tiers Section -->
+    <section class="tiers-section">
+        <div class="container">
+            <div class="tiers-header">
+                <p class="section-label">Unlock More</p>
+                <h2 class="section-title">Refer Friends → Unlock More</h2>
+                <p class="tiers-subtitle">They join free, you unlock rewards</p>
+            </div>
+
+            <div class="tiers-grid">
+                <div class="tier-card base">
+                    <p class="tier-badge">Base</p>
+                    <p class="tier-requirement">Join Free</p>
+                    <div class="tier-divider"></div>
+                    <div class="tier-reward">
+                        <h4>Everything Above</h4>
+                        <p>Instant access to all base resources</p>
+                    </div>
+                </div>
+
+                <div class="tier-card">
+                    <p class="tier-badge">Tier 1</p>
+                    <p class="tier-requirement">3 Referrals</p>
+                    <div class="tier-divider"></div>
+                    <div class="tier-reward">
+                        <h4>Subject Line & CTA Masterclass</h4>
+                        <p>The exact frameworks that get opens and clicks</p>
+                    </div>
+                </div>
+
+                <div class="tier-card">
+                    <p class="tier-badge">Tier 2</p>
+                    <p class="tier-requirement">6 Referrals</p>
+                    <div class="tier-divider"></div>
+                    <div class="tier-reward">
+                        <h4>Offer Creation System + Custom GPT</h4>
+                        <p>How to craft offers that make prospects say yes</p>
+                    </div>
+                </div>
+
+                <div class="tier-card featured">
+                    <p class="tier-badge">Tier 3</p>
+                    <p class="tier-requirement">10 Referrals</p>
+                    <div class="tier-divider"></div>
+                    <div class="tier-reward">
+                        <h4>Dream 100 System + 1:1 Strategy Call</h4>
+                        <p>Get your ideal clients on the phone</p>
+                    </div>
+                </div>
+
+                <div class="tier-card">
+                    <p class="tier-badge">Tier 4</p>
+                    <p class="tier-requirement">20 Referrals</p>
+                    <div class="tier-divider"></div>
+                    <div class="tier-reward">
+                        <h4>The Complete Agency Roadmap</h4>
+                        <p>5-stage system to build a cold email agency (zero → scale)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="final-cta-content">
+                <p class="section-label">Limited Time</p>
+                <h2 class="section-title">Get Everything Free</h2>
+                <p class="urgency-text">
+                    Everything above becomes part of Lead Formatter's paid membership after January 31. Join the waitlist now — get it all free.
+                </p>
+
+                <form class="email-form">
+                    <input type="email" class="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="submit-btn">Join the Waitlist</button>
+                </form>
+
+                <div class="trust-line">
+                    <span class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        No credit card
+                    </span>
+                    <span class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        No commitment
+                    </span>
+                    <span class="trust-item">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        Just getting on the list
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
